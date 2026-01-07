@@ -3,116 +3,787 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marwan Berrayah – Technicien Informatique</title>
+  <meta name="description" content="Portfolio Marwan Berrayah">
+  <title>Marwan Berrayah | Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --primary: #4f46e5;
+      --secondary: #0ea5e9;
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.8);
+      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+      --bg-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    }
+
     body {
-      font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      background-color: #f4f6f8;
-      color: #333;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-gradient);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.5s ease;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
-    header {
-      background-color: #1f2937;
-      color: white;
-      padding: 40px 20px;
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .main-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+      padding: 0;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .left-controls {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 2000;
+    }
+
+    .theme-switch {
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 15px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .theme-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: transform 0.2s;
+      outline: none;
+    }
+
+    .theme-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .t-aurora { background: linear-gradient(135deg, #4f46e5, #0ea5e9); }
+    .t-midnight { background: linear-gradient(135deg, #0f172a, #334155); }
+    .t-forest { background: linear-gradient(135deg, #166534, #22c55e); }
+    .t-sunset { background: linear-gradient(135deg, #c2410c, #f97316); }
+
+    /* Bouton d'impression modifié pour agir comme bouton */
+    .pdf-btn {
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
       text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      backdrop-filter: blur(5px);
+      transition: all 0.2s;
+      border: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer; /* Ajouté car c'est un bouton maintenant */
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.2em;
-    }
-    header p {
-      margin-top: 10px;
-      font-size: 1.1em;
-    }
-    section {
-      max-width: 900px;
-      margin: 30px auto;
+
+    .pdf-btn:hover {
       background: white;
-      padding: 30px;
+      transform: translateY(-2px);
+      color: var(--primary);
+    }
+
+    body.dark-mode .pdf-btn {
+      background: rgba(30, 41, 59, 0.8);
+      color: white;
+    }
+
+    header {
+      padding: 60px 40px 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid var(--glass-border);
+      text-align: left;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(34, 197, 94, 0.1);
+      color: #166534;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      width: fit-content;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+    
+    body.dark-mode .status-badge { color: #86efac; background: rgba(34, 197, 94, 0.2); }
+
+    .status-dot {
+      width: 8px; height: 8px; background: #22c55e; border-radius: 50%; margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      margin: 0;
+      letter-spacing: -1px;
+      background: -webkit-linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .lang-switch {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      display: flex;
+      gap: 5px;
+      background: rgba(255,255,255,0.8);
+      padding: 5px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      backdrop-filter: blur(5px);
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 5px 10px;
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-light);
+      font-family: 'Space Grotesk', sans-serif;
+      transition: 0.2s;
     }
+
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .content-area {
+      padding: 40px;
+    }
+
+    section {
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     h2 {
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-      color: #1f2937;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
     }
-    ul {
-      padding-left: 20px;
+    
+    h2::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 24px;
+      background: var(--primary);
+      border-radius: 4px;
+      margin-right: 12px;
     }
-    li {
-      margin-bottom: 8px;
+
+    p { line-height: 1.7; color: var(--text-light); font-size: 1.05rem; }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .contact {
-      background-color: #f9fafb;
-      padding: 20px;
-      border-radius: 6px;
+
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: transform 0.2s;
+      display: flex;
+      align-items: center;
     }
+    
+    body.dark-mode .skill-tag { background: rgba(30, 41, 59, 0.8); border-color: rgba(255,255,255,0.1); }
+
+    .skill-tag:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+      border-color: var(--secondary);
+    }
+
+    .skill-tag span { font-weight: 400; color: var(--text-light); margin-left: 5px; font-size: 0.9em; }
+
+    .timeline {
+      border-left: 2px solid var(--glass-border);
+      padding-left: 30px;
+      margin-left: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -37px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border: 3px solid var(--primary);
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .timeline-item:hover::after { background: var(--primary); box-shadow: 0 0 0 5px rgba(79, 70, 229, 0.2); }
+    
+    .timeline-item.current::after {
+        border-color: #22c55e;
+        background: #22c55e;
+    }
+
+    .date {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .timeline-item h3 {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .timeline-item p {
+      margin: 5px 0 0;
+    }
+
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .lang-item {
+      background: rgba(255, 255, 255, 0.4);
+      padding: 15px 20px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+    
+    body.dark-mode .lang-item { background: rgba(30, 41, 59, 0.4); border-color: rgba(255,255,255,0.05); }
+
+    .lang-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lang-name { font-weight: 700; color: var(--text-dark); }
+    .lang-level-text { font-size: 0.8rem; color: var(--text-light); }
+
+    .lang-dots { display: flex; gap: 4px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; opacity: 0.5; }
+    .dot.filled { background: var(--primary); opacity: 1; }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+    
+    body.dark-mode .contact-card { background: rgba(30, 41, 59, 0.6); }
+    
+    .contact-link {
+        display: inline-block;
+        margin: 10px;
+        padding: 12px 24px;
+        background: #f1f5f9;
+        color: var(--text-dark);
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+    
+    body.dark-mode .contact-link { background: #1e293b; color: #e2e8f0; }
+    
+    .contact-link.primary { background: var(--primary); color: white; }
+    .contact-link:hover { transform: scale(1.05); }
+
     footer {
       text-align: center;
       padding: 20px;
-      color: #6b7280;
-      font-size: 0.9em;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* CSS d'impression CRITIQUE pour générer un PDF propre */
+    @media print {
+      .left-controls,
+      .lang-switch, 
+      footer { 
+        display: none !important; 
+      }
+
+      .main-container {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        background: white;
+      }
+      
+      body { background: white !important; -webkit-print-color-adjust: exact; }
+
+      /* Force la couleur noire pour tout le texte */
+      p, span, h1, h2, h3, .lang-level-text, .lang-name {
+        color: black !important;
+        -webkit-text-fill-color: black !important;
+      }
+      
+      /* Rend les cadres plus simples */
+      .skill-tag, .lang-item, .contact-card { 
+        border: 1px solid #ddd; 
+        box-shadow: none; 
+        background: transparent !important;
+      }
+
+      /* Gestion des sauts de page */
+      section {
+        opacity: 1 !important;
+        transform: none !important;
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+      }
+      
+      header {
+          padding-top: 0;
+          padding-bottom: 20px;
+      }
+    }
+
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+    @media (max-width: 768px) {
+      .left-controls { top: 15px; left: 15px; }
+      .main-container { margin: 10px; margin-top: 60px; border-radius: 16px; }
+      h1 { font-size: 2rem; }
+      header { padding: 40px 20px; }
+      .content-area { padding: 25px; }
+      .lang-switch { top: 15px; right: 15px; }
+      .contact-link { display: block; margin: 10px 0; }
+      .languages-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>BERRAYAH Marwan</h1>
-    <p>Technicien informatique junior – Bruxelles</p>
-  </header>
+  <div class="left-controls">
+    <div class="theme-switch">
+      <button class="theme-btn t-aurora" onclick="setTheme('aurora')" title="Aurora"></button>
+      <button class="theme-btn t-midnight" onclick="setTheme('midnight')" title="Midnight"></button>
+      <button class="theme-btn t-forest" onclick="setTheme('forest')" title="Forest"></button>
+      <button class="theme-btn t-sunset" onclick="setTheme('sunset')" title="Sunset"></button>
+    </div>
+    
+    <button onclick="window.print()" class="pdf-btn" data-lang="btn_pdf">
+       ↓ Générer PDF
+    </button>
+  </div>
 
-  <section>
-    <h2>À propos de moi</h2>
-    <p>
-      Je suis technicien informatique junior, titulaire d’un CESS et d’une qualification en informatique obtenue en promotion sociale.
-      Sérieux, motivé et rigoureux, je m’intéresse au support informatique, au dépannage et à l’assistance aux utilisateurs.
-      Je suis actuellement à la recherche d’une opportunité professionnelle à Bruxelles.
-    </p>
-  </section>
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLanguage('fr')">FR</button>
+    <button class="lang-btn" onclick="setLanguage('nl')">NL</button>
+    <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+    <button class="lang-btn" onclick="setLanguage('de')">DE</button>
+  </div>
 
-  <section>
-    <h2>Compétences</h2>
-    <ul>
-      <li>Support informatique niveau 1 (helpdesk)</li>
-      <li>Installation et configuration de postes PC</li>
-      <li>Dépannage matériel et logiciel</li>
-      <li>Bureautique : Word, Excel, PowerPoint, Access</li>
-      <li>Notions de réseaux informatiques</li>
-    </ul>
-  </section>
+  <div class="main-container">
+    <header>
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        <span data-lang="status">Disponible / Open to work</span>
+      </div>
+      <h1>BERRAYAH MARWAN</h1>
+      <p data-lang="header_role">Technicien IT & Étudiant Développeur</p>
+    </header>
 
-  <section>
-    <h2>Formation</h2>
-    <ul>
-      <li><strong>Technicien en informatique</strong> – Institut Marguerite Massart, Bruxelles (Promotion sociale)</li>
-      <li><strong>CESS</strong> – École Agnès Varda, Bruxelles</li>
-    </ul>
-  </section>
+    <div class="content-area">
+      
+      <section id="about">
+        <h2 data-lang="title_about">À propos</h2>
+        <p data-lang="about_text">
+          Passionné par l'informatique, je suis titulaire d'un CESS et d'une qualification technique. Actuellement, je poursuis mon évolution en Bachelier Programmation. Je combine des compétences techniques solides (Hardware/Réseau) avec une curiosité insatiable pour le développement.
+        </p>
+      </section>
 
-  <section>
-    <h2>Langues</h2>
-    <ul>
-      <li>Français : langue maternelle</li>
-      <li>Arabe : langue maternelle</li>
-      <li>Néerlandais : notions de base</li>
-      <li>Anglais : notions de base</li>
-    </ul>
-  </section>
+      <section id="skills">
+        <h2 data-lang="title_skills">Compétences</h2>
+        <div class="skills-grid">
+          <div class="skill-tag" data-lang="skill_1">Support IT <span>Helpdesk niv 1</span></div>
+          <div class="skill-tag" data-lang="skill_2">Hardware <span>Diagnostic & Réparation</span></div>
+          <div class="skill-tag" data-lang="skill_3">Windows <span>10 / 11 Masterisation</span></div>
+          <div class="skill-tag" data-lang="skill_4">Linux <span>Réseau & Admin (Bash)</span></div>
+          <div class="skill-tag" style="border-color:var(--primary); background:rgba(79, 70, 229, 0.05);" data-lang="skill_6">Curiosité <span>Veille Techno & Dev</span></div>
+        </div>
+      </section>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <p>Email : <strong>marwanberrayah@gmail.com</strong></p>
-    <p>Téléphone : <strong>0484 79 88 75</strong></p>
-    <p>Localisation : <strong>Bruxelles</strong></p>
-  </section>
+      <section id="timeline">
+        <h2 data-lang="title_xp">Parcours</h2>
+        <div class="timeline">
+          
+          <div class="timeline-item current">
+            <span class="date" data-lang="date_current">2025 – Présent</span>
+            <h3 data-lang="xp_1_title">Bachelier en Programmation (1ère année)</h3>
+            <p>Institut Supérieur de Formation Continue d'Etterbeek</p>
+          </div>
+
+          <div class="timeline-item">
+            <span class="date" data-lang="date_cess">2024 – 2025</span>
+            <h3 data-lang="xp_2_title">CESS (Validé)</h3>
+            <p>École Agnès Varda, Bruxelles</p>
+          </div>
+
+          <div class="timeline-item">
+            <span class="date" data-lang="date_qualif">2020 – 2024</span>
+            <h3 data-lang="xp_3_title">Qualification Technicien Informatique</h3>
+            <p>Institut Marguerite Massart</p>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="languages">
+        <h2 data-lang="title_lang">Langues</h2>
+        <div class="languages-grid">
+          
+          <div class="lang-item">
+            <div class="lang-info">
+              <span class="lang-name" data-lang="lang_fr">Français</span>
+              <span class="lang-level-text" data-lang="lang_native">Maternelle</span>
+            </div>
+            <div class="lang-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+            </div>
+          </div>
+
+          <div class="lang-item">
+            <div class="lang-info">
+              <span class="lang-name" data-lang="lang_ar">Arabe</span>
+              <span class="lang-level-text" data-lang="lang_native">Maternelle</span>
+            </div>
+            <div class="lang-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </div>
+
+          <div class="lang-item">
+            <div class="lang-info">
+              <span class="lang-name" data-lang="lang_en">Anglais</span>
+              <span class="lang-level-text" data-lang="lang_tech">Technique / Base</span>
+            </div>
+            <div class="lang-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </div>
+
+          <div class="lang-item">
+            <div class="lang-info">
+              <span class="lang-name" data-lang="lang_nl">Néerlandais</span>
+              <span class="lang-level-text" data-lang="lang_basic">Notions de base</span>
+            </div>
+            <div class="lang-dots">
+              <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2 data-lang="title_contact">Contact</h2>
+        <div class="contact-card">
+          <p style="margin-bottom: 20px;" data-lang="contact_intro">Basé à Bruxelles. Prêt à vous rencontrer.</p>
+          <a href="mailto:marwanberrayah@gmail.com" class="contact-link primary">marwanberrayah@gmail.com</a>
+          <a href="tel:+32484798875" class="contact-link">0484 79 88 75</a>
+        </div>
+      </section>
+
+    </div>
+  </div>
 
   <footer>
-    © 2026 – Marwan Berrayah
+    © 2026 Marwan Berrayah
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+    const themes = {
+      aurora: {
+        primary: '#4f46e5',
+        secondary: '#0ea5e9',
+        textDark: '#1e293b',
+        textLight: '#64748b',
+        glassBg: 'rgba(255, 255, 255, 0.65)',
+        bgGradient: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+        isDark: false
+      },
+      midnight: {
+        primary: '#818cf8',
+        secondary: '#38bdf8',
+        textDark: '#f1f5f9',
+        textLight: '#94a3b8',
+        glassBg: 'rgba(15, 23, 42, 0.7)',
+        bgGradient: 'linear-gradient(135deg, #0f172a 0%, #020617 100%)',
+        isDark: true
+      },
+      forest: {
+        primary: '#166534',
+        secondary: '#22c55e',
+        textDark: '#052e16',
+        textLight: '#166534',
+        glassBg: 'rgba(255, 255, 255, 0.7)',
+        bgGradient: 'linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%)',
+        isDark: false
+      },
+      sunset: {
+        primary: '#ea580c',
+        secondary: '#f97316',
+        textDark: '#431407',
+        textLight: '#9a3412',
+        glassBg: 'rgba(255, 255, 255, 0.7)',
+        bgGradient: 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)',
+        isDark: false
+      }
+    };
+
+    function setTheme(name) {
+      const root = document.documentElement;
+      const theme = themes[name];
+      
+      root.style.setProperty('--primary', theme.primary);
+      root.style.setProperty('--secondary', theme.secondary);
+      root.style.setProperty('--text-dark', theme.textDark);
+      root.style.setProperty('--text-light', theme.textLight);
+      root.style.setProperty('--glass-bg', theme.glassBg);
+      root.style.setProperty('--bg-gradient', theme.bgGradient);
+      
+      if(theme.isDark) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+    }
+
+    const translations = {
+      fr: {
+        status: "Disponible / Open to work",
+        header_role: "Technicien IT & Étudiant Développeur",
+        title_about: "À propos",
+        about_text: "Passionné par l'informatique, je suis titulaire d'un CESS et d'une qualification technique. Actuellement, je poursuis mon évolution en Bachelier Programmation. Je combine des compétences techniques solides (Hardware/Réseau) avec une curiosité insatiable pour le développement. Veille technologique active.",
+        title_skills: "Compétences",
+        skill_1: "Support IT <span>Helpdesk niv 1</span>",
+        skill_2: "Hardware <span>Diagnostic & Réparation</span>",
+        skill_3: "Windows <span>10 / 11 Masterisation</span>",
+        skill_4: "Linux <span>Réseau & Admin (Bash)</span>",
+        skill_6: "Curiosité <span>Veille Techno & Dev</span>",
+        title_lang: "Langues",
+        lang_fr: "Français", lang_ar: "Arabe", lang_en: "Anglais", lang_nl: "Néerlandais",
+        lang_native: "Maternelle",
+        lang_tech: "Technique / Base",
+        lang_basic: "Notions de base",
+        title_xp: "Parcours",
+        date_current: "2025 – PRÉSENT",
+        xp_1_title: "Bachelier en Programmation (1ère année)",
+        date_cess: "2024 – 2025",
+        xp_2_title: "CESS (Validé)",
+        date_qualif: "2020 – 2024",
+        xp_3_title: "Qualification Technicien Informatique",
+        title_contact: "Contact",
+        contact_intro: "Basé à Bruxelles. Prêt à vous rencontrer.",
+        btn_pdf: "↓ Générer PDF"
+      },
+      en: {
+        status: "Available for hire",
+        header_role: "IT Technician & Student Developer",
+        title_about: "About Me",
+        about_text: "IT enthusiast, holder of a CESS and technical qualification. Currently pursuing a Bachelor's in Programming. I combine solid technical skills (Hardware/Network) with an insatiable curiosity for development. Active technology watch.",
+        title_skills: "Skills",
+        skill_1: "IT Support <span>Level 1 Helpdesk</span>",
+        skill_2: "Hardware <span>Diagnosis & Repair</span>",
+        skill_3: "Windows <span>10 / 11 Deployment</span>",
+        skill_4: "Linux <span>Network & Admin (Bash)</span>",
+        skill_6: "Curiosity <span>Tech Watch & Dev</span>",
+        title_lang: "Languages",
+        lang_fr: "French", lang_ar: "Arabic", lang_en: "English", lang_nl: "Dutch",
+        lang_native: "Native Speaker",
+        lang_tech: "Technical / Basic",
+        lang_basic: "Basic notions",
+        title_xp: "Career Path",
+        date_current: "2025 – PRESENT",
+        xp_1_title: "Bachelor in Programming (1st year)",
+        date_cess: "2024 – 2025",
+        xp_2_title: "CESS (Validated)",
+        date_qualif: "2020 – 2024",
+        xp_3_title: "IT Technician Qualification",
+        title_contact: "Contact",
+        contact_intro: "Based in Brussels. Ready to meet.",
+        btn_pdf: "↓ Generate PDF"
+      },
+      nl: {
+        status: "Beschikbaar voor werk",
+        header_role: "IT-technicus & Student Programmeur",
+        title_about: "Over Mij",
+        about_text: "Gepassioneerd door IT, houder van een CESS en technische kwalificatie. Momenteel volg ik een Bachelor Programmeren. Ik combineer solide technische vaardigheden met een onverzadigbare nieuwsgierigheid. Actieve technologische waakzaamheid.",
+        title_skills: "Vaardigheden",
+        skill_1: "IT Support <span>Helpdesk niv 1</span>",
+        skill_2: "Hardware <span>Diagnose & Reparatie</span>",
+        skill_3: "Windows <span>10 / 11 Masteren</span>",
+        skill_4: "Linux <span>Netwerk & Admin</span>",
+        skill_6: "Nieuwsgierigheid <span>Tech Watch</span>",
+        title_lang: "Talen",
+        lang_fr: "Frans", lang_ar: "Arabisch", lang_en: "Engels", lang_nl: "Nederlands",
+        lang_native: "Moedertaal",
+        lang_tech: "Technisch / Basis",
+        lang_basic: "Basis",
+        title_xp: "Traject",
+        date_current: "2025 – HEDEN",
+        xp_1_title: "Bachelor Programmeren (1e jaar)",
+        date_cess: "2024 – 2025",
+        xp_2_title: "CESS (Geldig)",
+        date_qualif: "2020 – 2024",
+        xp_3_title: "Kwalificatie IT-technicus",
+        title_contact: "Contact",
+        contact_intro: "Gevestigd in Brussel. Klaar voor een gesprek.",
+        btn_pdf: "↓ Genereer PDF"
+      },
+      de: {
+        status: "Verfügbar",
+        header_role: "IT-Techniker & Programmierstudent",
+        title_about: "Über Mich",
+        about_text: "IT-Enthusiast, Inhaber eines CESS und technischer Qualifikation. Derzeit Bachelor-Student der Programmierung. Ich kombiniere solide technische Fähigkeiten mit unersättlicher Neugier.",
+        title_skills: "Fähigkeiten",
+        skill_1: "IT Support <span>Helpdesk Level 1</span>",
+        skill_2: "Hardware <span>Diagnose & Reparatur</span>",
+        skill_3: "Windows <span>10 / 11 Deployment</span>",
+        skill_4: "Linux <span>Netzwerk & Admin</span>",
+        skill_6: "Neugier <span>Tech Watch</span>",
+        title_lang: "Sprachen",
+        lang_fr: "Französisch", lang_ar: "Arabisch", lang_en: "Englisch", lang_nl: "Niederländisch",
+        lang_native: "Muttersprache",
+        lang_tech: "Technisch / Basis",
+        lang_basic: "Grundkenntnisse",
+        title_xp: "Werdegang",
+        date_current: "2025 – HEUTE",
+        xp_1_title: "Bachelor Programmierung (1. Jahr)",
+        date_cess: "2024 – 2025",
+        xp_2_title: "CESS (Bestätigt)",
+        date_qualif: "2020 – 2024",
+        xp_3_title: "Qualifikation IT-Techniker",
+        title_contact: "Contact",
+        contact_intro: "Wohnhaft in Brüssel. Bereit für ein Gespräch.",
+        btn_pdf: "↓ PDF Erstellen"
+      }
+    };
+
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+      
+      const pdfBtn = document.querySelector('.pdf-btn');
+      if(pdfBtn) pdfBtn.innerText = translations[lang].btn_pdf;
+
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(b => b.textContent.toLowerCase() === lang);
+      if(activeBtn) activeBtn.classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
