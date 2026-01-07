@@ -54,77 +54,39 @@
       transition: all 0.5s ease;
     }
 
-    .left-controls {
+    .theme-switch {
       position: fixed;
       top: 30px;
       left: 30px;
       display: flex;
-      flex-direction: column;
-      gap: 15px;
-      z-index: 2000;
-    }
-
-    .theme-switch {
-      display: flex;
-      gap: 10px;
+      gap: 12px;
       background: rgba(255, 255, 255, 0.8);
       padding: 10px 15px;
       border-radius: 50px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      z-index: 2000;
       backdrop-filter: blur(5px);
     }
 
     .theme-btn {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       border: 2px solid white;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
       outline: none;
     }
 
     .theme-btn:hover {
       transform: scale(1.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     .t-aurora { background: linear-gradient(135deg, #4f46e5, #0ea5e9); }
     .t-midnight { background: linear-gradient(135deg, #0f172a, #334155); }
     .t-forest { background: linear-gradient(135deg, #166534, #22c55e); }
     .t-sunset { background: linear-gradient(135deg, #c2410c, #f97316); }
-
-    /* Bouton d'impression modifié pour agir comme bouton */
-    .pdf-btn {
-      background: rgba(255, 255, 255, 0.8);
-      color: var(--text-dark);
-      text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 12px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.8rem;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      backdrop-filter: blur(5px);
-      transition: all 0.2s;
-      border: 2px solid transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      cursor: pointer; /* Ajouté car c'est un bouton maintenant */
-    }
-
-    .pdf-btn:hover {
-      background: white;
-      transform: translateY(-2px);
-      color: var(--primary);
-    }
-
-    body.dark-mode .pdf-btn {
-      background: rgba(30, 41, 59, 0.8);
-      color: white;
-    }
 
     header {
       padding: 60px 40px 50px;
@@ -388,9 +350,8 @@
       font-weight: 500;
     }
 
-    /* CSS d'impression CRITIQUE pour générer un PDF propre */
     @media print {
-      .left-controls,
+      .theme-switch,
       .lang-switch, 
       footer { 
         display: none !important; 
@@ -408,20 +369,17 @@
       
       body { background: white !important; -webkit-print-color-adjust: exact; }
 
-      /* Force la couleur noire pour tout le texte */
       p, span, h1, h2, h3, .lang-level-text, .lang-name {
         color: black !important;
         -webkit-text-fill-color: black !important;
       }
       
-      /* Rend les cadres plus simples */
       .skill-tag, .lang-item, .contact-card { 
         border: 1px solid #ddd; 
         box-shadow: none; 
         background: transparent !important;
       }
 
-      /* Gestion des sauts de page */
       section {
         opacity: 1 !important;
         transform: none !important;
@@ -438,7 +396,8 @@
     @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
     @media (max-width: 768px) {
-      .left-controls { top: 15px; left: 15px; }
+      .theme-switch { top: 15px; left: 15px; padding: 8px; }
+      .theme-btn { width: 20px; height: 20px; }
       .main-container { margin: 10px; margin-top: 60px; border-radius: 16px; }
       h1 { font-size: 2rem; }
       header { padding: 40px 20px; }
@@ -451,17 +410,11 @@
 </head>
 <body>
 
-  <div class="left-controls">
-    <div class="theme-switch">
-      <button class="theme-btn t-aurora" onclick="setTheme('aurora')" title="Aurora"></button>
-      <button class="theme-btn t-midnight" onclick="setTheme('midnight')" title="Midnight"></button>
-      <button class="theme-btn t-forest" onclick="setTheme('forest')" title="Forest"></button>
-      <button class="theme-btn t-sunset" onclick="setTheme('sunset')" title="Sunset"></button>
-    </div>
-    
-    <button onclick="window.print()" class="pdf-btn" data-lang="btn_pdf">
-       ↓ Générer PDF
-    </button>
+  <div class="theme-switch">
+    <button class="theme-btn t-aurora" onclick="setTheme('aurora')" title="Aurora"></button>
+    <button class="theme-btn t-midnight" onclick="setTheme('midnight')" title="Midnight"></button>
+    <button class="theme-btn t-forest" onclick="setTheme('forest')" title="Forest"></button>
+    <button class="theme-btn t-sunset" onclick="setTheme('sunset')" title="Sunset"></button>
   </div>
 
   <div class="lang-switch">
@@ -682,8 +635,7 @@
         date_qualif: "2020 – 2024",
         xp_3_title: "Qualification Technicien Informatique",
         title_contact: "Contact",
-        contact_intro: "Basé à Bruxelles. Prêt à vous rencontrer.",
-        btn_pdf: "↓ Générer PDF"
+        contact_intro: "Basé à Bruxelles. Prêt à vous rencontrer."
       },
       en: {
         status: "Available for hire",
@@ -709,8 +661,7 @@
         date_qualif: "2020 – 2024",
         xp_3_title: "IT Technician Qualification",
         title_contact: "Contact",
-        contact_intro: "Based in Brussels. Ready to meet.",
-        btn_pdf: "↓ Generate PDF"
+        contact_intro: "Based in Brussels. Ready to meet."
       },
       nl: {
         status: "Beschikbaar voor werk",
@@ -736,8 +687,7 @@
         date_qualif: "2020 – 2024",
         xp_3_title: "Kwalificatie IT-technicus",
         title_contact: "Contact",
-        contact_intro: "Gevestigd in Brussel. Klaar voor een gesprek.",
-        btn_pdf: "↓ Genereer PDF"
+        contact_intro: "Gevestigd in Brussel. Klaar voor een gesprek."
       },
       de: {
         status: "Verfügbar",
@@ -763,8 +713,7 @@
         date_qualif: "2020 – 2024",
         xp_3_title: "Qualifikation IT-Techniker",
         title_contact: "Contact",
-        contact_intro: "Wohnhaft in Brüssel. Bereit für ein Gespräch.",
-        btn_pdf: "↓ PDF Erstellen"
+        contact_intro: "Wohnhaft in Brüssel. Bereit für ein Gespräch."
       }
     };
 
@@ -776,9 +725,6 @@
         }
       });
       
-      const pdfBtn = document.querySelector('.pdf-btn');
-      if(pdfBtn) pdfBtn.innerText = translations[lang].btn_pdf;
-
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
       const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(b => b.textContent.toLowerCase() === lang);
       if(activeBtn) activeBtn.classList.add('active');
